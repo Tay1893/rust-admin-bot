@@ -8,11 +8,6 @@ function isDaytime() {
   return hour >= 7 && hour < 24; // běží od 7 do půlnoci
 }
 
-if (!isDaytime()) {
-  console.log('Noční režim aktivní, bot se vypíná.');
-  process.exit(0);
-}
-
 client.once('ready', () => {
   console.log(`Přihlášen jako ${client.user.tag}`);
 });
@@ -24,6 +19,13 @@ const adminIDs = [
 
 client.on('presenceUpdate', (oldPresence, newPresence) => {
   if (!newPresence || !newPresence.userId) return;
+
+  // Pokud není denní režim, ignoruj event
+  if (!isDaytime()) {
+    // Můžeš případně přidat logování:
+    // console.log('Noční režim - ignoruji změnu statusu.');
+    return;
+  }
 
   if (adminIDs.includes(newPresence.userId)) {
     const status = newPresence.status; // online, offline, idle, dnd
