@@ -8,21 +8,8 @@ const client = new Client({
   ],
 });
 
-const adminIDs = [
-  '361941430194929665', // Tay
-  // další ID
-];
-
 client.once('ready', () => {
-  console.log(`Bot přihlášen jako ${client.user.tag}`);
+  console.log(`✅ Bot přihlášen jako ${client.user.tag}`);
 });
 
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-  if (!newPresence || !newPresence.userId) return;
-
-  if (adminIDs.includes(newPresence.userId)) {
-    console.log(`Status uživatele ${newPresence.userId} je nyní: ${newPresence.status}`);
-  }
-});
-
-client.login(process.env.DISCORD_BOT_TOKEN);
+client.login('MTM3NjMwMjY3NjQ5MjQxOTA5Mw.GbvNxu._nRDCd5HCwuaIuPHNzxf5VVZ3vgbdcWlUnNans'); // <- vlož token sem
